@@ -1,0 +1,18 @@
+script_template: inno_setup.iss
+app_id: 5DCD6EB9-C544-4086-A116-42C0041231CF
+app_name: GLClash
+publisher_name: GuLiang-I
+publisher_url: https://github.com/guliangTwT/GLClash
+display_name: GLClash
+executable_name: GLClash.exe
+output_base_file_name: GLClash.exe
+# Resolved against the project root: flutter_distributor turns this into an
+# absolute path via Directory.current.
+setup_icon_file: windows\runner\resources\app_icon.ico
+locales:
+  # Written into the .iss verbatim, so this one stays relative to the generated
+  # script in dist/.
+  - lang: zh
+    file: ..\windows\packaging\exe\ChineseSimplified.isl
+  - lang: en
+privileges_required: admin

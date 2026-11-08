@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GLClash glyph: the shield-and-bolt badge of the app icon, on the same
+     240-unit canvas the previous glyph used. The tray and notification icons
+     are generated from this, so it has to read at 18 px on its own.
+     The Android notification drawables ic.xml and ic_service.xml carry the
+     same geometry as fill paths; change them together. -->
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <title>glyph</title>
+  <defs>
+    <linearGradient id="top" x1="0" y1="30" x2="0" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A1818"/>
+      <stop offset="1" stop-color="#2B2427"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="60" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF9ED0"/>
+      <stop offset="1" stop-color="#F272B0"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 26 192 58V126q0 48-72 88-72-40-72-88V58Z"
+          fill="none" stroke="url(#top)" stroke-width="18"/>
+    <path d="M128 66 96 124h24l-8 50 34-60h-24z" fill="url(#bolt)"/>
+  </g>
+</svg>

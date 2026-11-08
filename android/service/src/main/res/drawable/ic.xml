@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Notification small icon: the GLClash shield-and-bolt glyph as a white
+     silhouette, matching assets_source/images/icon/glyph.svg. The system tints
+     it, so only the alpha matters here. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240"
+    tools:ignore="VectorRaster">
+    <path
+        android:pathData="M120 26 192 58V126q0 48-72 88-72-40-72-88V58Z"
+        android:strokeWidth="18"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:strokeColor="#FFFFFF"
+        android:fillColor="@android:color/transparent"/>
+    <path
+        android:pathData="M128 66 96 124h24l-8 50 34-60h-24z"
+        android:fillColor="#FFFFFF"/>
+</vector>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Files-app root icon: the GLClash shield-and-bolt glyph in colour, matching
+     assets_source/images/icon/glyph.svg. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="240"
+    android:viewportHeight="240"
+    tools:ignore="VectorRaster">
+    <path
+        android:pathData="M120 26 192 58V126q0 48-72 88-72-40-72-88V58Z"
+        android:strokeWidth="18"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round"
+        android:fillColor="@android:color/transparent">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="30"
+                android:endX="0"
+                android:endY="210"
+                android:startColor="#1A1818"
+                android:endColor="#2B2427"/>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M128 66 96 124h24l-8 50 34-60h-24z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="60"
+                android:endX="0"
+                android:endY="200"
+                android:startColor="#FF9ED0"
+                android:endColor="#F272B0"/>
+        </aapt:attr>
+    </path>
+</vector>

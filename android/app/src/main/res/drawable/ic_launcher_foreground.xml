@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adaptive-icon foreground: the GLClash shield-and-bolt glyph on the 108dp
+     canvas, drawn from assets_source/images/icon/glyph.svg. Keep them in step.
+     Phone icon: 0.70 scale keeps the shield in the safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:width="108dp"
+        android:height="108dp"
+        android:viewportWidth="240"
+        android:viewportHeight="240">
+    <group
+            android:scaleX="0.70"
+            android:scaleY="0.70"
+            android:translateX="36"
+            android:translateY="36">
+        <path
+                android:pathData="M120 26 192 58V126q0 48-72 88-72-40-72-88V58Z"
+                android:strokeWidth="18"
+                android:strokeLineJoin="round"
+                android:strokeLineCap="round"
+                android:fillColor="@android:color/transparent">
+            <aapt:attr name="android:strokeColor">
+                <gradient
+                        android:type="linear"
+                        android:startX="0"
+                        android:startY="30"
+                        android:endX="0"
+                        android:endY="210"
+                        android:startColor="#1A1818"
+                        android:endColor="#2B2427"/>
+            </aapt:attr>
+        </path>
+        <path android:pathData="M128 66 96 124h24l-8 50 34-60h-24z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                        android:type="linear"
+                        android:startX="0"
+                        android:startY="60"
+                        android:endX="0"
+                        android:endY="200"
+                        android:startColor="#FF9ED0"
+                        android:endColor="#F272B0"/>
+            </aapt:attr>
+        </path>
+    </group>
+</vector>

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "versions": [
+    {
+      "version": "1.0.0",
+      "tag": "v1.0.0",
+      "date": "2026-11-08",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "feat",
+          "entries": [
+            {
+              "id": "codeberg-standby",
+              "scope": "update",
+              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and release page both fail, the update check asks Codeberg instead of giving up"
+            },
+            {
+              "id": "multi-host-download",
+              "scope": "update",
+              "text": "A download walks every host that serves the same file, so one unreachable mirror no longer ends the update"
+            }
+          ]
+        },
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "checksum-verify",
+              "scope": "update",
+              "text": "A downloaded installer is checked against its SHA-256 before it is run; a truncated or damaged transfer is retried from the next host instead of being installed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

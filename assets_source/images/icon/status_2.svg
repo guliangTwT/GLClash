@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- glyph.svg's geometry; the state shows only in the colours. -->
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <title>status_2</title>
+  <defs>
+    <linearGradient id="top" x1="0" y1="30" x2="0" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#726BF1"/>
+      <stop offset="1" stop-color="#5B5EE1"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" y1="60" x2="0" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8FA6FF"/>
+      <stop offset="1" stop-color="#6E8CF5"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 26 192 58V126q0 48-72 88-72-40-72-88V58Z"
+          fill="none" stroke="url(#top)" stroke-width="18"/>
+    <path d="M128 66 96 124h24l-8 50 34-60h-24z" fill="url(#bolt)"/>
+  </g>
+</svg>
