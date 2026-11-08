@@ -2,17 +2,17 @@
 
 ## v1.0.0 (2026-11-08)
 
+**Breaking Changes**
+
+- **update** Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once. (efea6c8)
+
 **Features**
 
-- **update** Every release is published on Codeberg beside GitHub; when the GitHub API and release page both fail,
-  the update check asks Codeberg instead of giving up.
-- **update** A download walks every host that serves the same file, so one unreachable mirror no longer ends
-  the update.
+- **update** Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up. (efea6c8)
 
 **Bug Fixes**
 
-- **update** A downloaded installer is checked against its SHA-256 before it is run; a truncated or damaged transfer
-  is retried from the next host instead of being installed.
+- **update** A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed. (efea6c8)
 
 <!-- changelog:frozen -->
 <!-- Entries below predate the structured pipeline. Their wording is kept as written; only the heading and list style were normalized. -->

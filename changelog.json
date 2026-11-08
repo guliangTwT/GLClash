@@ -8,17 +8,22 @@
       "prerelease": false,
       "groups": [
         {
+          "type": "breaking",
+          "entries": [
+            {
+              "id": "efea6c8",
+              "scope": "update",
+              "text": "Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once."
+            }
+          ]
+        },
+        {
           "type": "feat",
           "entries": [
             {
-              "id": "codeberg-standby",
+              "id": "efea6c8",
               "scope": "update",
-              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and release page both fail, the update check asks Codeberg instead of giving up"
-            },
-            {
-              "id": "multi-host-download",
-              "scope": "update",
-              "text": "A download walks every host that serves the same file, so one unreachable mirror no longer ends the update"
+              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up."
             }
           ]
         },
@@ -26,9 +31,9 @@
           "type": "fix",
           "entries": [
             {
-              "id": "checksum-verify",
+              "id": "efea6c8",
               "scope": "update",
-              "text": "A downloaded installer is checked against its SHA-256 before it is run; a truncated or damaged transfer is retried from the next host instead of being installed"
+              "text": "A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed."
             }
           ]
         }
