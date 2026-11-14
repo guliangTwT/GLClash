@@ -469,6 +469,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Dirección de salida",
     ),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sin origen"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage(
+      "Pega una línea y los campos se rellenan",
+    ),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage(
+      "Dirección, puerto y cuenta",
+    ),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Cadena de proxies"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
       "Filtro de nodos",

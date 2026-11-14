@@ -349,6 +349,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainEmpty": MessageLookupByLibrary.simpleMessage("还没有链路。添加一条即可自动创建出口。"),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口地址"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("不设上游"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage("粘贴一行即可自动填好"),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage("地址、端口与账号"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("链式代理"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("节点过滤"),
     "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(

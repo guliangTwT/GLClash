@@ -432,6 +432,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Exit"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("No upstream"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage(
+      "Paste one line to fill this in",
+    ),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage(
+      "Address, port and account",
+    ),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Proxy chain"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
       "Node filter",

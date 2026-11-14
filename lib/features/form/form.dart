@@ -11,4 +11,5 @@ export 'filter.dart';
 export 'rule.dart';
 export 'rule_preset.dart';
 export 'subscription_upstream_form.dart';
+export 'upstream_line.dart';
 export 'upstream_proxy_form.dart';

@@ -42,6 +42,7 @@ class CustomProxyDialersView extends ConsumerWidget {
             groups,
             proxy: proxy.name,
             dialers: profileData?.dialers ?? const {},
+            proxies: profileData?.proxies ?? const {},
           );
           bool loops(String target) => loopOf(target).isNotEmpty;
           // Every local proxy is offered, not only the ones a group names: an
@@ -125,7 +126,9 @@ class CustomProxyDialersView extends ConsumerWidget {
       }
       final title = context.appLocalizations.chainUpstreamManual;
       final upstream = await showUpstreamProxyForm(context, title: title);
-      if (upstream == null) {
+      // The page can be dropped while the sheet is open, and a torn-down
+      // widget's ref throws rather than reading.
+      if (upstream == null || !context.mounted) {
         return;
       }
       final name = _createUpstream(ref, upstream);
@@ -134,6 +137,9 @@ class CustomProxyDialersView extends ConsumerWidget {
     }
     if (res.startsWith(_subscriptionUpstreamPrefix)) {
       final subscription = res.substring(_subscriptionUpstreamPrefix.length);
+      if (!context.mounted) {
+        return;
+      }
       if (!ref.read(profileProvidersProvider).containsKey(subscription)) {
         return;
       }
@@ -306,7 +312,11 @@ class CustomProxyDialersView extends ConsumerWidget {
       return;
     }
     final name = _createUpstream(ref, exit);
-    _addToGroup(ref, name);
+    if (!_addToGroup(ref, name)) {
+      // The groups are still loading, so there is nowhere to put the exit yet;
+      // it stays in the list and joins a group once the page redraws.
+      return;
+    }
     final proxy =
         (ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
             .firstWhere((item) => item.name == name);
@@ -319,26 +329,33 @@ class CustomProxyDialersView extends ConsumerWidget {
   /// Puts a new proxy into a group, since a config declares one only when a
   /// group takes it in; a profile with no group gets one holding just this
   /// proxy, or the chain would have nothing to route through.
-  void _addToGroup(WidgetRef ref, String name) {
+  ///
+  /// Returns false while the groups are still loading: creating one then would
+  /// not see the names already in use and could land a duplicate the core
+  /// refuses, so the caller waits for a loaded list instead.
+  bool _addToGroup(WidgetRef ref, String name) {
     final groups = ref.read(proxyGroupsProvider(profileId)).value;
+    if (groups == null) {
+      return false;
+    }
     final notifier = ref.read(proxyGroupsProvider(profileId).notifier);
-    final selector = groups?.where((group) {
-      return group.type == GroupType.Selector;
-    }).firstOrNull;
+    final selector = groups
+        .where((group) => group.type == GroupType.Selector)
+        .firstOrNull;
     if (selector != null) {
       notifier.put(selector.copyWith(proxies: [...?selector.proxies, name]));
-      return;
+      return true;
     }
-    if (groups != null && groups.isNotEmpty) {
+    if (groups.isNotEmpty) {
       final target = groups.first;
       notifier.put(target.copyWith(proxies: [...?target.proxies, name]));
-      return;
+      return true;
     }
     final taken = {
       for (final proxy
           in ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
         proxy.name,
-      ...?groups?.map((group) => group.name),
+      for (final group in groups) group.name,
       ...reservedCustomProxyNames,
     };
     notifier.put(
@@ -349,6 +366,7 @@ class CustomProxyDialersView extends ConsumerWidget {
         proxies: [name],
       ),
     );
+    return true;
   }
 }
 

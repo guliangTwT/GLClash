@@ -374,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口アドレス"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("上流なし"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage("1行貼り付けると自動で入力されます"),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage("アドレス・ポート・アカウント"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("チェーンプロキシ"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("ノード絞り込み"),
     "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(

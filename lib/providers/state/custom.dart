@@ -516,7 +516,10 @@ Set<String> dialerLoop(
   Iterable<ProxyGroup> groups, {
   required String proxy,
   Map<String, String> dialers = const {},
-}) => dialerLoopsOf(groups, proxy: proxy, dialers: dialers)(target);
+  Set<String> proxies = const {},
+}) => dialerLoopsOf(groups, proxy: proxy, dialers: dialers, proxies: proxies)(
+  target,
+);
 
 bool _takesInEveryProxy(ProxyGroup group) =>
     group.includeAllProxies == true &&
@@ -525,11 +528,17 @@ bool _takesInEveryProxy(ProxyGroup group) =>
     (group.excludeType ?? '').isEmpty;
 
 /// [dialerLoop] for any target of [proxy], finding what reaches it once.
+///
+/// [proxies] is every local proxy the profile holds. One a chain dials through
+/// is declared in the config even when no group names it, so its own dial has
+/// to be followed; without this set a name that no proxy carries would be
+/// walked as if it were one.
 Set<String> Function(String target) dialerLoopsOf(
   Iterable<ProxyGroup> groups, {
   required String proxy,
   Map<String, String> dialers = const {},
-}) => _DialerGraph(groups, dialers).loopsOf(proxy);
+  Set<String> proxies = const {},
+}) => _DialerGraph(groups, dialers, proxies).loopsOf(proxy);
 
 class _DialerGraph {
   final declared = <String>{};
@@ -539,15 +548,25 @@ class _DialerGraph {
   final takingEveryProxy = <String>{};
   final parents = <String, List<String>>{};
 
-  _DialerGraph(Iterable<ProxyGroup> groups, Map<String, String> dialers) {
+  _DialerGraph(
+    Iterable<ProxyGroup> groups,
+    Map<String, String> dialers,
+    Set<String> proxies,
+  ) {
     for (final group in groups) {
       declared.addAll(group.proxies ?? const <String>[]);
     }
+    // A proxy a chain dials through is declared in the config even when no
+    // group names it, which is how a typed-in upstream exists. Its own dial
+    // has to be followed too, or a loop through it would go unseen and mihomo
+    // would refuse the whole config.
+    declared.addAll(dialers.keys.where(proxies.contains));
     for (final MapEntry(key: name, value: dialer) in dialers.entries) {
-      if (declared.contains(name)) {
-        chained[name] = dialer;
-        members[name] = [dialer];
+      if (!declared.contains(name)) {
+        continue;
       }
+      chained[name] = dialer;
+      members[name] = [dialer];
     }
     for (final group in groups) {
       final takesAll = _takesInEveryProxy(group);
@@ -611,8 +630,12 @@ class _DialLoops {
   final looping = <String>{};
   final throughGroups = <String, List<CustomIssue>>{};
 
-  _DialLoops(Iterable<ProxyGroup> groups, Map<String, String> dialers) {
-    final graph = _DialerGraph(groups, dialers);
+  _DialLoops(
+    Iterable<ProxyGroup> groups,
+    Map<String, String> dialers,
+    Set<String> proxies,
+  ) {
+    final graph = _DialerGraph(groups, dialers, proxies);
     final dials = [
       for (final MapEntry(key: proxy, value: target) in dialers.entries)
         if (graph.declared.contains(proxy)) (proxy: proxy, target: target),
@@ -701,8 +724,8 @@ class _DialLoops {
 
 final _profileDialLoops = Expando<_DialLoops>();
 
-_DialLoops _dialLoopsIn(CustomProfileData data) =>
-    _profileDialLoops[data] ??= _DialLoops(data.proxyGroups, data.dialers);
+_DialLoops _dialLoopsIn(CustomProfileData data) => _profileDialLoops[data] ??=
+    _DialLoops(data.proxyGroups, data.dialers, data.proxies);
 
 /// Drops a dialer that leads back to its proxy, since mihomo would follow
 /// that loop on every dial, and one naming a proxy the config does not
@@ -729,7 +752,9 @@ List<Map<String, dynamic>> appProxiesPayload(
       groups.any((group) => group.name == name) ||
       RuleTarget.baseTargets.contains(name) ||
       name == GroupName.GLOBAL.name;
-  final looping = _DialLoops(groups, chain).looping;
+  final looping = _DialLoops(groups, chain, {
+    for (final proxy in proxies) proxy.name,
+  }).looping;
   final payload = <Map<String, dynamic>>[];
   for (final proxy in proxies) {
     if (!declared(proxy.name)) {
@@ -782,6 +807,7 @@ List<CustomIssue> proxyDialerIssues(
           data.proxyGroups,
           proxy: proxy.name,
           dialers: data.dialers,
+          proxies: data.proxies,
         ).isNotEmpty;
   if (loops) {
     return [CustomIssue.dialerLoop(proxy.name, target)];
@@ -864,7 +890,8 @@ List<CustomIssue> proxyGroupIssues(ProxyGroup group, CustomProfileData data) {
           (item) => item.id != group.id && item.name == name,
         );
     dialerLoops =
-        _DialLoops(groups, data.dialers).throughGroups[name] ?? const [];
+        _DialLoops(groups, data.dialers, data.proxies).throughGroups[name] ??
+        const [];
   }
   return [
     if (name.isEmpty)

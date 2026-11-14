@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'form_page.dart';
 import 'form_row.dart';
+import 'upstream_line.dart';
 
 /// A proxy typed in by hand: the type, where it is, and the account it takes.
 ///
@@ -49,12 +50,14 @@ class _UpstreamProxyFormState extends State<UpstreamProxyForm> {
   final _portFocus = FocusNode();
   final _usernameFocus = FocusNode();
   final _passwordFocus = FocusNode();
+  final _paste = TextEditingController();
   late final TextEditingController _server;
   late final TextEditingController _port;
   late final TextEditingController _username;
   late final TextEditingController _password;
   late String _type;
   var _attempted = false;
+  var _pasteRejected = false;
 
   @override
   void initState() {
@@ -75,11 +78,38 @@ class _UpstreamProxyFormState extends State<UpstreamProxyForm> {
     _portFocus.dispose();
     _usernameFocus.dispose();
     _passwordFocus.dispose();
+    _paste.dispose();
     _server.dispose();
     _port.dispose();
     _username.dispose();
     _password.dispose();
     super.dispose();
+  }
+
+  /// Fills every field from one pasted line and clears it, so the form below
+  /// shows what was read rather than the text it came from.
+  ///
+  /// Only a submit triggers this: parsing on every keystroke would fire on
+  /// `host:8` while the port is still being typed, clearing the box and
+  /// keeping the half-typed port.
+  void _handlePaste([String? _]) {
+    final text = _paste.text;
+    final parsed = parseUpstreamLine(text);
+    setState(() {
+      _pasteRejected = parsed == null && text.trim().isNotEmpty;
+      if (parsed == null) {
+        return;
+      }
+      if (parsed.type case final type?) {
+        _type = type;
+      }
+      _server.text = parsed.server;
+      _port.text = '${parsed.port}';
+      _username.text = parsed.username;
+      _password.text = parsed.password;
+      _paste.clear();
+      _attempted = false;
+    });
   }
 
   ({_Field field, String message})? _issue() {
@@ -126,6 +156,37 @@ class _UpstreamProxyFormState extends State<UpstreamProxyForm> {
       onSave: _handleSubmit,
       error: issue?.message,
       children: [
+        generateSection(
+          title: l.chainPasteHint,
+          items: [
+            FormRow(
+              title: l.chainPasteLine,
+              invalid: _pasteRejected,
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: FormRowTextField(
+                      controller: _paste,
+                      hintText: 'host:port:user:pass',
+                      textInputAction: TextInputAction.done,
+                      autocorrect: false,
+                      onChanged: (_) {
+                        if (_pasteRejected) {
+                          setState(() {
+                            _pasteRejected = false;
+                          });
+                        }
+                      },
+                      onFieldSubmitted: _handlePaste,
+                    ),
+                  ),
+                  EntryButton.add(onPressed: _handlePaste),
+                ],
+              ),
+            ),
+          ],
+        ),
         generateSection(
           items: [
             ListItem<String>.options(

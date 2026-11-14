@@ -365,6 +365,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("출구 주소"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("업스트림 없음"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage(
+      "한 줄을 붙여넣으면 자동으로 채워집니다",
+    ),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage("주소, 포트, 계정"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("프록시 체인"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("노드 필터"),
     "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(

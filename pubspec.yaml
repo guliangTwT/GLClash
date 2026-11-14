@@ -1,7 +1,7 @@
 name: gl_clash
 description: GLClash — a multi-platform proxy client based on mihomo (ClashMeta), open-source and ad-free.
 publish_to: 'none'
-version: 1.0.4+2026111404
+version: 1.0.5+2026111501
 environment:
   sdk: '>=3.10.0 <4.0.0'
 

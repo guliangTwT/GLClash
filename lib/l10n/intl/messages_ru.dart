@@ -448,6 +448,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Адрес выхода"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Без вышестоящего"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage(
+      "Вставьте одну строку, поля заполнятся сами",
+    ),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage(
+      "Адрес, порт и учётная запись",
+    ),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Цепочка прокси"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
       "Фильтр узлов",

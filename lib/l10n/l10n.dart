@@ -5041,6 +5041,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Paste one line to fill this in`
+  String get chainPasteHint {
+    return Intl.message(
+      'Paste one line to fill this in',
+      name: 'chainPasteHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address, port and account`
+  String get chainPasteLine {
+    return Intl.message(
+      'Address, port and account',
+      name: 'chainPasteLine',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to exit the current window?`
   String get confirmExitWindow {
     return Intl.message(

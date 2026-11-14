@@ -468,6 +468,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Adresse de sortie",
     ),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sans amont"),
+    "chainPasteHint": MessageLookupByLibrary.simpleMessage(
+      "Collez une ligne pour remplir les champs",
+    ),
+    "chainPasteLine": MessageLookupByLibrary.simpleMessage(
+      "Adresse, port et compte",
+    ),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Chaîne de proxys"),
     "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
       "Filtre de nœuds",
