@@ -2,6 +2,34 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "1.0.1",
+      "tag": "v1.0.1",
+      "date": "2026-11-14",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "feat",
+          "entries": [
+            {
+              "id": "b0ae014",
+              "scope": "custom",
+              "text": "The dialer page is now a proxy chain view: every proxy a group names is shown as an exit with its upstream address, a group upstream shows the group, and a proxy with no upstream reads as direct"
+            }
+          ]
+        },
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "b0ae014",
+              "scope": "custom",
+              "text": "A chain naming a proxy the config does not declare is dropped, and a chain through such a name is no longer offered; one dangling reference used to make the core reject the whole profile"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "1.0.0",
       "tag": "v1.0.0",
       "date": "2026-11-08",
@@ -13,7 +41,7 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once."
+              "text": "builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand."
             }
           ]
         },
@@ -23,17 +51,7 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up."
-            }
-          ]
-        },
-        {
-          "type": "fix",
-          "entries": [
-            {
-              "id": "efea6c8",
-              "scope": "update",
-              "text": "A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed."
+              "text": "Serve updates from GitHub with Codeberg as the standby"
             }
           ]
         }

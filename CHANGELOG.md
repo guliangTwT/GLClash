@@ -1,18 +1,24 @@
 # Changelog
 
+## v1.0.1 (2026-11-14)
+
+**Features**
+
+- **custom** The dialer page is now a proxy chain view: every proxy a group names is shown as an exit with its upstream address, a group upstream shows the group, and a proxy with no upstream reads as direct (b0ae014)
+
+**Bug Fixes**
+
+- **custom** A chain naming a proxy the config does not declare is dropped, and a chain through such a name is no longer offered; one dangling reference used to make the core reject the whole profile (b0ae014)
+
 ## v1.0.0 (2026-11-08)
 
 **Breaking Changes**
 
-- **update** Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once. (efea6c8)
+- **update** builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand. (efea6c8)
 
 **Features**
 
-- **update** Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up. (efea6c8)
-
-**Bug Fixes**
-
-- **update** A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed. (efea6c8)
+- **update** Serve updates from GitHub with Codeberg as the standby (efea6c8)
 
 <!-- changelog:frozen -->
 <!-- Entries below predate the structured pipeline. Their wording is kept as written; only the heading and list style were normalized. -->
