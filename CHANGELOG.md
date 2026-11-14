@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.2 (2026-11-14)
+
+**Features**
+
+- **custom** A chain's upstream can be typed in as type, address, port and account, creating the proxy for you; a typed upstream is declared in the config even when no group names it (7e568e1)
+
 ## v1.0.1 (2026-11-14)
 
 **Features**
