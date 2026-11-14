@@ -4911,6 +4911,51 @@ class AppLocalizations {
     );
   }
 
+  /// `Proxy chain`
+  String get chainProxy {
+    return Intl.message('Proxy chain', name: 'chainProxy', desc: '', args: []);
+  }
+
+  /// `Exit`
+  String get chainExitAddress {
+    return Intl.message('Exit', name: 'chainExitAddress', desc: '', args: []);
+  }
+
+  /// `Upstream`
+  String get chainUpstreamAddress {
+    return Intl.message(
+      'Upstream',
+      name: 'chainUpstreamAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upstream address`
+  String get chainUpstream {
+    return Intl.message(
+      'Upstream address',
+      name: 'chainUpstream',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No upstream`
+  String get chainNoUpstream {
+    return Intl.message(
+      'No upstream',
+      name: 'chainNoUpstream',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Direct`
+  String get chainDirect {
+    return Intl.message('Direct', name: 'chainDirect', desc: '', args: []);
+  }
+
   /// `Are you sure you want to exit the current window?`
   String get confirmExitWindow {
     return Intl.message(

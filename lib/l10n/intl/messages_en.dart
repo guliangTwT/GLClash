@@ -425,6 +425,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("Can\'t save"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("Direct"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage("Exit"),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("No upstream"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("Proxy chain"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("Upstream address"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("Upstream"),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "Failed to switch proxy; the previous selection has been restored",
     ),

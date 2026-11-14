@@ -358,6 +358,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("취소"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("모두 선택 해제"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("저장할 수 없음"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("직접 연결"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage("출구 주소"),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("업스트림 없음"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("프록시 체인"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "프록시를 전환하지 못해 이전 선택을 복원했습니다",
     ),

@@ -367,6 +367,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("すべて選択解除"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("保存できません"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("直接接続"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口アドレス"),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("上流なし"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("チェーンプロキシ"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("上流アドレス"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上流アドレス"),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "プロキシの切り替えに失敗したため、前回の選択に戻しました",
     ),

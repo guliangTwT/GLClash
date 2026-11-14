@@ -459,6 +459,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotSave": MessageLookupByLibrary.simpleMessage(
       "Enregistrement impossible",
     ),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("Direct"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage(
+      "Adresse de sortie",
+    ),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sans amont"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("Chaîne de proxys"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("Adresse amont"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
+      "Adresse amont",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "Échec du changement de proxy ; la sélection précédente a été rétablie",
     ),

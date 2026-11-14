@@ -474,10 +474,10 @@ void main() {
       Finder state(String title, String text) =>
           find.descendant(of: row(title), matching: find.text(text));
 
-      expect(tile(l.dialerProxy), findsNothing);
+      expect(tile(l.chainProxy), findsNothing);
       await tester.tap(tile(l.more));
       await tester.pumpAndSettle();
-      expect(state(l.dialerProxy, l.none), findsOneWidget);
+      expect(state(l.chainProxy, l.none), findsOneWidget);
       expect(state('NTP', l.enabled), findsOneWidget);
       expect(state(l.sniffer, l.disabled), findsOneWidget);
       expect(state(l.tun, l.defaultText), findsOneWidget);

@@ -116,6 +116,9 @@ class _CustomProfileViewState extends ConsumerState<CustomProfileView> {
     }
     final profileId = widget.profileId;
     final profile = ref.read(profileProvider(profileId));
+    // Dialers are not checked here: the page only offers a target a group names
+    // or a group itself, so a stored dialer cannot exist without a group, and a
+    // non-empty group list already answers this.
     return profile != null &&
         profile.label == _initialProfile?.label &&
         profile.overrides == const ProfileOverrides() &&
@@ -540,7 +543,7 @@ class _MoreSectionsView extends ConsumerWidget {
               _sectionRow(
                 context,
                 AppGlyphs.link,
-                appLocalizations.dialerProxy,
+                appLocalizations.chainProxy,
                 Text(
                   dialerCount > 0
                       ? appLocalizations.proxiesCount(

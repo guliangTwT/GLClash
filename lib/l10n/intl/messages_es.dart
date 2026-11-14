@@ -460,6 +460,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "Deseleccionar todo",
     ),
     "cannotSave": MessageLookupByLibrary.simpleMessage("No se puede guardar"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("Directo"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage(
+      "Dirección de salida",
+    ),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sin origen"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("Cadena de proxies"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage(
+      "Dirección de origen",
+    ),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
+      "Dirección de origen",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "No se pudo cambiar de proxy; se ha restaurado la selección anterior",
     ),

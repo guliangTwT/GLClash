@@ -441,6 +441,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("Снять выделение"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("Не удалось сохранить"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("Напрямую"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage("Адрес выхода"),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Без вышестоящего"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("Цепочка прокси"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("Адрес вышестоящего"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
+      "Адрес вышестоящего",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "Не удалось переключить прокси; восстановлен предыдущий выбор",
     ),

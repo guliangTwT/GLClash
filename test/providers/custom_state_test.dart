@@ -641,6 +641,32 @@ void main() {
       );
     });
 
+    test('a dialer the config cannot declare is dropped, not left dangling', () {
+      const home = CustomProxy(
+        id: 9,
+        definition: {'name': 'Home', 'type': 'ss'},
+      );
+      const sel = ProxyGroup(
+        id: 1,
+        name: 'Sel',
+        type: GroupType.Selector,
+        proxies: ['Home'],
+      );
+      // Ghost is named by no group, so the config never declares it and mihomo
+      // would reject the whole file for the reference.
+      expect(
+        appProxiesPayload([home], dialers: {9: 'Ghost'}, groups: const [sel]),
+        [home.definition],
+      );
+      // DIRECT is defined by every config, so it stays.
+      expect(
+        appProxiesPayload([home], dialers: {9: 'DIRECT'}, groups: const [sel]),
+        [
+          {'name': 'Home', 'type': 'ss', 'dialer-proxy': 'DIRECT'},
+        ],
+      );
+    });
+
     test('include-all-proxies declares no app proxy of its own and drops a '
         'dialer it loops back through', () {
       const unnamed = CustomProxy(

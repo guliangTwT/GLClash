@@ -344,6 +344,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("取消"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("取消全选"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("无法保存"),
+    "chainDirect": MessageLookupByLibrary.simpleMessage("直连"),
+    "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口地址"),
+    "chainNoUpstream": MessageLookupByLibrary.simpleMessage("不设上游"),
+    "chainProxy": MessageLookupByLibrary.simpleMessage("链式代理"),
+    "chainUpstream": MessageLookupByLibrary.simpleMessage("上游地址"),
+    "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上游地址"),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "切换代理失败，已恢复上一次的选择",
     ),

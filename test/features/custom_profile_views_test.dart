@@ -1952,16 +1952,33 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text(currentAppLocalizations.none), findsNothing);
     expect(find.text('Spare'), findsNothing);
     expect(find.byGlyph(AppGlyphs.info), findsOneWidget);
+    // Each row reads as the pair the chain is made of: Home dials through Work,
+    // Work leaves directly.
+    expect(
+      find.text(currentAppLocalizations.chainExitAddress),
+      findsNWidgets(2),
+    );
+    expect(
+      find.text(currentAppLocalizations.chainUpstreamAddress),
+      findsNWidgets(2),
+    );
+    expect(find.text('Home'), findsOneWidget);
+    // Work is both its own exit and Home's upstream.
+    expect(find.text('Work'), findsNWidgets(2));
+    // Home dials through Work; Work is the only one leaving directly.
+    expect(find.text(currentAppLocalizations.chainDirect), findsOneWidget);
 
     Finder offered(String name) => find.descendant(
       of: find.byType(SelectionSheet<String>),
       matching: find.text(name),
     );
+    // A row is keyed by the exit proxy's id, so it can be picked even when the
+    // name also shows up as another row's upstream.
+    Finder rowOf(int proxyId) => find.byKey(ValueKey(proxyId));
 
-    await tester.tap(find.text('Home'));
+    await tester.tap(rowOf(10));
     await tester.pumpAndSettle();
     expect(offered(currentAppLocalizations.localProxies), findsOneWidget);
     expect(offered('Work'), findsOneWidget);
@@ -1971,7 +1988,7 @@ void main() {
     await tester.tap(offered('Work'));
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Work'));
+    await tester.tap(rowOf(11));
     await tester.pumpAndSettle();
     expect(offered('Home'), findsNothing);
     expect(offered('Work'), findsNothing);

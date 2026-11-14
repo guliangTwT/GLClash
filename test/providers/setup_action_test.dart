@@ -1835,6 +1835,164 @@ void main() {
       expect((providers['plain'] as YamlMap).keys, {'type', 'path'});
     });
 
+    test('a custom profile writes its proxy dialers into the config', () async {
+      final profile = Profile.custom(label: 'p');
+      final core = _MockCoreHandlerInterface();
+      const home = CustomProxy(
+        id: 11,
+        definition: {'name': 'Home', 'type': 'socks5', 'server': '::1'},
+      );
+      const relay = CustomProxy(
+        id: 12,
+        definition: {'name': 'Relay', 'type': 'socks5', 'server': '::1'},
+      );
+      const landing = CustomProxy(
+        id: 13,
+        definition: {'name': 'Landing', 'type': 'socks5', 'server': '::1'},
+      );
+      final setupState = nullProfileSetupState.copyWith(
+        profileId: profile.id,
+        profileType: ProfileType.custom,
+        proxyGroups: [
+          const ProxyGroup(
+            id: 1,
+            name: 'Select',
+            type: GroupType.Selector,
+            proxies: ['Home', 'Relay', 'Landing'],
+          ),
+        ],
+        appProxies: const [home, relay, landing],
+        // Home dials through Relay, Relay through Landing: a plain chain with
+        // nothing leading back.
+        proxyDialers: const {11: 'Relay', 12: 'Landing'},
+      );
+      final scoped = ProviderContainer(
+        overrides: [
+          coreHandlerProvider.overrideWithValue(CoreController.scoped(core)),
+          setupActionProvider.overrideWith(SetupAction.new),
+        ],
+      );
+      addTearDown(scoped.dispose);
+
+      final res = await scoped
+          .read(setupActionProvider.notifier)
+          .getProfile(
+            setupState: setupState,
+            patchConfig: const PatchClashConfig(),
+          );
+      final proxies = (loadYaml(res.yaml) as YamlMap)['proxies'] as YamlList;
+      final byName = {
+        for (final proxy in proxies) proxy['name'] as String: proxy as YamlMap,
+      };
+
+      expect(byName['Home']!['dialer-proxy'], 'Relay');
+      expect(byName['Relay']!['dialer-proxy'], 'Landing');
+      expect(byName['Landing']!.containsKey('dialer-proxy'), isFalse);
+    });
+
+    test('a proxy dials through a group the config declares', () async {
+      final profile = Profile.custom(label: 'p');
+      final core = _MockCoreHandlerInterface();
+      const home = CustomProxy(
+        id: 11,
+        definition: {'name': 'Home', 'type': 'socks5', 'server': '::1'},
+      );
+      const landing = CustomProxy(
+        id: 13,
+        definition: {'name': 'Landing', 'type': 'socks5', 'server': '::1'},
+      );
+      final setupState = nullProfileSetupState.copyWith(
+        profileId: profile.id,
+        profileType: ProfileType.custom,
+        proxyGroups: [
+          const ProxyGroup(
+            id: 1,
+            name: 'Select',
+            type: GroupType.Selector,
+            proxies: ['Home'],
+          ),
+          // The hop group holds other nodes, not the proxy that dials through
+          // it, so following it cannot come back.
+          const ProxyGroup(
+            id: 2,
+            name: 'Hop',
+            type: GroupType.Selector,
+            proxies: ['Landing'],
+          ),
+        ],
+        appProxies: const [home, landing],
+        proxyDialers: const {11: 'Hop'},
+      );
+      final scoped = ProviderContainer(
+        overrides: [
+          coreHandlerProvider.overrideWithValue(CoreController.scoped(core)),
+          setupActionProvider.overrideWith(SetupAction.new),
+        ],
+      );
+      addTearDown(scoped.dispose);
+
+      final res = await scoped
+          .read(setupActionProvider.notifier)
+          .getProfile(
+            setupState: setupState,
+            patchConfig: const PatchClashConfig(),
+          );
+      final proxies = (loadYaml(res.yaml) as YamlMap)['proxies'] as YamlList;
+      final homeYaml =
+          proxies.firstWhere((proxy) => proxy['name'] == 'Home') as YamlMap;
+
+      expect(homeYaml['dialer-proxy'], 'Hop');
+    });
+
+    test('a dialer that the config would not declare is dropped, not left '
+        'dangling', () async {
+      final profile = Profile.custom(label: 'p');
+      final core = _MockCoreHandlerInterface();
+      const home = CustomProxy(
+        id: 11,
+        definition: {'name': 'Home', 'type': 'socks5', 'server': '::1'},
+      );
+      const ghost = CustomProxy(
+        id: 12,
+        definition: {'name': 'Ghost', 'type': 'socks5', 'server': '::1'},
+      );
+      final setupState = nullProfileSetupState.copyWith(
+        profileId: profile.id,
+        profileType: ProfileType.custom,
+        proxyGroups: [
+          const ProxyGroup(
+            id: 1,
+            name: 'Select',
+            type: GroupType.Selector,
+            proxies: ['Home'],
+          ),
+        ],
+        appProxies: const [home, ghost],
+        // Ghost is named by no group, so the config never declares it; mihomo
+        // rejects the whole file for a dialer-proxy it cannot resolve.
+        proxyDialers: const {11: 'Ghost'},
+      );
+      final scoped = ProviderContainer(
+        overrides: [
+          coreHandlerProvider.overrideWithValue(CoreController.scoped(core)),
+          setupActionProvider.overrideWith(SetupAction.new),
+        ],
+      );
+      addTearDown(scoped.dispose);
+
+      final res = await scoped
+          .read(setupActionProvider.notifier)
+          .getProfile(
+            setupState: setupState,
+            patchConfig: const PatchClashConfig(),
+          );
+      final proxies = (loadYaml(res.yaml) as YamlMap)['proxies'] as YamlList;
+      final homeYaml = proxies.single as YamlMap;
+
+      expect(homeYaml['name'], 'Home');
+      expect(homeYaml.containsKey('dialer-proxy'), isFalse);
+    });
+
     test('a custom profile group taking in every proxy or provider declares '
         'none the profile does not name', () async {
       final profile = Profile.custom(label: 'p');

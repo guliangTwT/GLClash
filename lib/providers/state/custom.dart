@@ -705,13 +705,21 @@ _DialLoops _dialLoopsIn(CustomProfileData data) =>
     _profileDialLoops[data] ??= _DialLoops(data.proxyGroups, data.dialers);
 
 /// Drops a dialer that leads back to its proxy, since mihomo would follow
-/// that loop on every dial.
+/// that loop on every dial, and one naming a proxy the config does not
+/// declare, which mihomo refuses the whole config for.
 List<Map<String, dynamic>> appProxiesPayload(
   Iterable<CustomProxy> proxies, {
   required Map<int, String> dialers,
   required List<ProxyGroup> groups,
 }) {
   final named = {for (final group in groups) ...?group.proxies};
+  // Names the config will actually declare: the local proxies a group takes in,
+  // the groups themselves, and the targets mihomo defines for every config.
+  bool declared(String name) =>
+      named.contains(name) ||
+      groups.any((group) => group.name == name) ||
+      RuleTarget.baseTargets.contains(name) ||
+      name == GroupName.GLOBAL.name;
   final chain = {
     for (final proxy in proxies)
       if (named.contains(proxy.name)) proxy.name: ?dialers[proxy.id],
@@ -723,15 +731,26 @@ List<Map<String, dynamic>> appProxiesPayload(
       continue;
     }
     final dialer = chain[proxy.name];
-    if (dialer != null && !looping.contains(proxy.name)) {
-      payload.add({...proxy.definition, 'dialer-proxy': dialer});
+    if (dialer == null) {
+      payload.add({...proxy.definition}..remove('dialer-proxy'));
       continue;
     }
-    if (dialer != null) {
+    // A dialer naming a proxy the config does not declare makes mihomo reject
+    // the whole file ("dialer-proxy not found"), not just that proxy, so it is
+    // dropped the way a looping one is.
+    if (!declared(dialer)) {
+      commonPrint.log(
+        'Dropped the dialer of ${proxy.name}: the config declares no $dialer',
+        logLevel: LogLevel.warning,
+      );
+    } else if (looping.contains(proxy.name)) {
       commonPrint.log(
         'Dropped the dialer of ${proxy.name}: $dialer leads back to it',
         logLevel: LogLevel.warning,
       );
+    } else {
+      payload.add({...proxy.definition, 'dialer-proxy': dialer});
+      continue;
     }
     payload.add({...proxy.definition}..remove('dialer-proxy'));
   }
