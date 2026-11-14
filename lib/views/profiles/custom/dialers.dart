@@ -1,4 +1,5 @@
 import 'package:gl_clash/common/common.dart';
+import 'package:gl_clash/enum/enum.dart';
 import 'package:gl_clash/features/form/form.dart';
 import 'package:gl_clash/models/models.dart';
 import 'package:gl_clash/providers/providers.dart';
@@ -6,9 +7,11 @@ import 'package:gl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// The selection sheet's entry that opens the short upstream form. A value no
-/// proxy or group can carry, so it cannot collide with a real target.
+/// The selection sheet's entries that open a form rather than naming a target.
+/// Both carry a prefix no proxy or group can hold, so neither can collide with
+/// a real name even when a subscription shares one.
 const _manualUpstream = '\u0000manual-upstream';
+const _subscriptionUpstreamPrefix = '\u0000subscription:';
 
 /// A proxy's chain, read as the two addresses that decide where its traffic
 /// leaves from: the exit this profile names, and the upstream that carries it.
@@ -53,6 +56,15 @@ class CustomProxyDialersView extends ConsumerWidget {
             for (final group in groups)
               if (!loops(group.name)) group.name: group.type.name,
           };
+          // A subscription's nodes belong to the core, not to this profile, so
+          // mihomo refuses to dial through one by name. A group carrying the
+          // subscription is how a node of it becomes an upstream, which is what
+          // picking a subscription here sets up.
+          final subscriptions = {
+            for (final MapEntry(key: label, value: _)
+                in ref.watch(profileProvidersProvider).entries)
+              if (!loops(label)) label: appLocalizations.chainSubscriptionNode,
+          };
           return SelectionSheet<String>(
             title: appLocalizations.chainUpstream,
             sections: [
@@ -74,10 +86,23 @@ class CustomProxyDialersView extends ConsumerWidget {
                 items: groupTypes.keys.toList(),
                 subtitleBuilder: (_, name) => groupTypes[name],
               ),
+              SelectionSection(
+                label: appLocalizations.chainSubscriptionUpstream,
+                items: [
+                  for (final label in subscriptions.keys)
+                    '$_subscriptionUpstreamPrefix$label',
+                ],
+                subtitleBuilder: (_, item) =>
+                    subscriptions[item.substring(
+                      _subscriptionUpstreamPrefix.length,
+                    )],
+              ),
             ],
             labelBuilder: (item) => switch (item) {
               _manualUpstream => appLocalizations.chainUpstreamManual,
               '' => appLocalizations.chainDirect,
+              _ when item.startsWith(_subscriptionUpstreamPrefix) =>
+                item.substring(_subscriptionUpstreamPrefix.length),
               _ => item,
             },
             selectedOf: (ref) => ref.watch(
@@ -106,9 +131,85 @@ class CustomProxyDialersView extends ConsumerWidget {
       ref.read(proxyDialersProvider(profileId).notifier).set(proxy.id, name);
       return;
     }
+    if (res.startsWith(_subscriptionUpstreamPrefix)) {
+      final subscription = res.substring(_subscriptionUpstreamPrefix.length);
+      if (!ref.read(profileProvidersProvider).containsKey(subscription)) {
+        return;
+      }
+      if (!context.mounted) {
+        return;
+      }
+      final filter = await showSubscriptionUpstreamForm(
+        context,
+        title: subscription,
+      );
+      if (filter == null || !context.mounted) {
+        return;
+      }
+      // mihomo matches the filter as a regexp, so a typo there would otherwise
+      // make the core refuse the whole config; ask it before saving.
+      final errors = await checkFilters(ref, [filter]);
+      if (!context.mounted) {
+        return;
+      }
+      if (errors != null && errors.first.isNotEmpty) {
+        await dialogs.showAlert(
+          title: context.appLocalizations.cannotSave,
+          message: TextSpan(
+            text: context.appLocalizations.customIssueInvalidFilter(
+              context.appLocalizations.chainSubscriptionFilter,
+              errors.first,
+            ),
+          ),
+        );
+        return;
+      }
+      final name = _createSubscriptionUpstream(ref, subscription, filter);
+      ref.read(proxyDialersProvider(profileId).notifier).set(proxy.id, name);
+      return;
+    }
     ref
         .read(proxyDialersProvider(profileId).notifier)
         .set(proxy.id, res.isEmpty ? null : res);
+  }
+
+  /// A group carrying [subscription], narrowed by [filter] when it names one,
+  /// and answers the group's name.
+  ///
+  /// The chain has to point at something the config declares, and a
+  /// subscription's nodes are the core's, so the group is what makes a node of
+  /// it reachable as an upstream.
+  String _createSubscriptionUpstream(
+    WidgetRef ref,
+    String subscription,
+    String filter,
+  ) {
+    final taken = {
+      for (final proxy
+          in ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
+        proxy.name,
+      for (final group
+          in ref.read(proxyGroupsProvider(profileId)).value ??
+              const <ProxyGroup>[])
+        group.name,
+      ...reservedCustomProxyNames,
+    };
+    final name = freeProxyName(
+      filter.isEmpty ? subscription : '$subscription · $filter',
+      taken,
+    );
+    ref
+        .read(proxyGroupsProvider(profileId).notifier)
+        .put(
+          ProxyGroup(
+            id: snowflake.id,
+            name: name,
+            type: GroupType.Selector,
+            use: [subscription],
+            filter: filter.isEmpty ? null : filter,
+          ),
+        );
+    return name;
   }
 
   /// Saves the typed upstream as an app proxy and answers the name the chain

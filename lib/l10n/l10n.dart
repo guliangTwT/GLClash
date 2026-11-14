@@ -4986,6 +4986,46 @@ class AppLocalizations {
     );
   }
 
+  /// `From a subscription`
+  String get chainSubscriptionUpstream {
+    return Intl.message(
+      'From a subscription',
+      name: 'chainSubscriptionUpstream',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A node of this subscription`
+  String get chainSubscriptionNode {
+    return Intl.message(
+      'A node of this subscription',
+      name: 'chainSubscriptionNode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Node filter`
+  String get chainSubscriptionFilter {
+    return Intl.message(
+      'Node filter',
+      name: 'chainSubscriptionFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A group carrying the subscription is created for this upstream. Leave the filter empty to take every node, or name part of a node's name to narrow the group.`
+  String get chainSubscriptionFilterDesc {
+    return Intl.message(
+      'A group carrying the subscription is created for this upstream. Leave the filter empty to take every node, or name part of a node\'s name to narrow the group.',
+      name: 'chainSubscriptionFilterDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to exit the current window?`
   String get confirmExitWindow {
     return Intl.message(

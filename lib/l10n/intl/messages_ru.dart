@@ -445,6 +445,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Адрес выхода"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Без вышестоящего"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Цепочка прокси"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
+      "Фильтр узлов",
+    ),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "Для этого вышестоящего создаётся группа с этой подпиской. Пустой фильтр берёт все узлы; часть имени узла сужает группу.",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage(
+      "Узел этой подписки",
+    ),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "Из подписки",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("Адрес вышестоящего"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
       "Адрес вышестоящего",

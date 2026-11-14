@@ -466,6 +466,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sin origen"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Cadena de proxies"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
+      "Filtro de nodos",
+    ),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "Se crea un grupo con la suscripción para este origen. Un filtro vacío toma todos los nodos; parte del nombre de un nodo restringe el grupo.",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage(
+      "Un nodo de esta suscripción",
+    ),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "Desde una suscripción",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage(
       "Dirección de origen",
     ),

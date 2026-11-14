@@ -465,6 +465,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Sans amont"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Chaîne de proxys"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
+      "Filtre de nœuds",
+    ),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "Un groupe contenant l\'abonnement est créé pour cet amont. Un filtre vide prend tous les nœuds ; une partie du nom d\'un nœud restreint le groupe.",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage(
+      "Un nœud de cet abonnement",
+    ),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "Depuis un abonnement",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("Adresse amont"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
       "Adresse amont",

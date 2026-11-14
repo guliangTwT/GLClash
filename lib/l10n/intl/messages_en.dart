@@ -429,6 +429,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Exit"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("No upstream"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Proxy chain"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage(
+      "Node filter",
+    ),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "A group carrying the subscription is created for this upstream. Leave the filter empty to take every node, or name part of a node\'s name to narrow the group.",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage(
+      "A node of this subscription",
+    ),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "From a subscription",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("Upstream address"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("Upstream"),
     "chainUpstreamManual": MessageLookupByLibrary.simpleMessage(

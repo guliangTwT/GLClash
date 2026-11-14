@@ -362,6 +362,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("출구 주소"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("업스트림 없음"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("프록시 체인"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("노드 필터"),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "이 업스트림용으로 해당 구독을 포함하는 그룹이 만들어집니다. 필터를 비우면 모든 노드, 노드 이름의 일부를 넣으면 범위가 좁아집니다.",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage("이 구독의 노드"),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "구독에서 선택",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
     "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("업스트림 주소 입력"),

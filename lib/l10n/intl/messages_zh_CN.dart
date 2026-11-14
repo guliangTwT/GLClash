@@ -348,6 +348,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口地址"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("不设上游"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("链式代理"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("节点过滤"),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "会为这个上游创建一个包含该订阅的策略组。过滤留空表示包含全部节点；填入节点名的一部分可缩小范围，例如「日本」。",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage("该订阅里的节点"),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage("从订阅选择"),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("上游地址"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上游地址"),
     "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("手动填写上游地址"),

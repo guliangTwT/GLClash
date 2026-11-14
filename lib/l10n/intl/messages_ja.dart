@@ -371,6 +371,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口アドレス"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("上流なし"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("チェーンプロキシ"),
+    "chainSubscriptionFilter": MessageLookupByLibrary.simpleMessage("ノード絞り込み"),
+    "chainSubscriptionFilterDesc": MessageLookupByLibrary.simpleMessage(
+      "この上流用に、そのサブスクリプションを含むプロキシグループを作成します。絞り込みを空にすると全ノード、ノード名の一部を入れると範囲を狭められます。",
+    ),
+    "chainSubscriptionNode": MessageLookupByLibrary.simpleMessage(
+      "このサブスクリプションのノード",
+    ),
+    "chainSubscriptionUpstream": MessageLookupByLibrary.simpleMessage(
+      "サブスクリプションから",
+    ),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("上流アドレス"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上流アドレス"),
     "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("上流アドレスを入力"),
