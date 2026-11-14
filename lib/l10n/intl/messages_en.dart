@@ -425,7 +425,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("Can\'t save"),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("Add chain"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("Direct"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "No chain yet. Add one and its exit is created for you.",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Exit"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("No upstream"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Proxy chain"),

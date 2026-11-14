@@ -358,7 +358,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("취소"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("모두 선택 해제"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("저장할 수 없음"),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("체인 추가"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("직접 연결"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "아직 체인이 없습니다. 추가하면 출구가 함께 만들어집니다.",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("출구 주소"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("업스트림 없음"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("프록시 체인"),

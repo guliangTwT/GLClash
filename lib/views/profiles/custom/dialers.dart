@@ -3,6 +3,7 @@ import 'package:gl_clash/enum/enum.dart';
 import 'package:gl_clash/features/form/form.dart';
 import 'package:gl_clash/models/models.dart';
 import 'package:gl_clash/providers/providers.dart';
+import 'package:gl_clash/ui/icons/icons.dart';
 import 'package:gl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -249,11 +250,27 @@ class CustomProxyDialersView extends ConsumerWidget {
     final chains = data == null || all == null ? null : chainsOf(all, data);
     return CommonScaffold(
       title: appLocalizations.chainProxy,
+      iconActions: [
+        IconButtonData(
+          glyph: AppGlyphs.add,
+          tooltip: appLocalizations.chainAdd,
+          onPressed: () => _handleAdd(context, ref),
+        ),
+      ],
       body: NullStatusSwitcher(
         isLoading: chains == null,
         isEmpty: chains?.isEmpty ?? true,
         isSearching: false,
-        nullStatus: NullStatus(label: appLocalizations.appProxiesEmpty),
+        nullStatus: NullStatus(
+          label: appLocalizations.chainEmpty,
+          illustration: NullStatusIllustration.proxies,
+          action: TonalButton(
+            size: TonalButtonSize.bar,
+            glyph: AppGlyphs.addCircle,
+            label: appLocalizations.chainAdd,
+            onPressed: () => _handleAdd(context, ref),
+          ),
+        ),
         child: ListView.builder(
           padding: EdgeInsets.fromLTRB(
             16,
@@ -275,6 +292,61 @@ class CustomProxyDialersView extends ConsumerWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  /// Adds a chain: the exit is a proxy this profile carries, so a new one is
+  /// created from the same short form an upstream uses, then its upstream is
+  /// picked through the usual sheet.
+  Future<void> _handleAdd(BuildContext context, WidgetRef ref) async {
+    final title = context.appLocalizations.chainExitAddress;
+    final exit = await showUpstreamProxyForm(context, title: title);
+    if (exit == null || !context.mounted) {
+      return;
+    }
+    final name = _createUpstream(ref, exit);
+    _addToGroup(ref, name);
+    final proxy =
+        (ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
+            .firstWhere((item) => item.name == name);
+    if (!context.mounted) {
+      return;
+    }
+    await _handleSelect(context, ref, proxy);
+  }
+
+  /// Puts a new proxy into a group, since a config declares one only when a
+  /// group takes it in; a profile with no group gets one holding just this
+  /// proxy, or the chain would have nothing to route through.
+  void _addToGroup(WidgetRef ref, String name) {
+    final groups = ref.read(proxyGroupsProvider(profileId)).value;
+    final notifier = ref.read(proxyGroupsProvider(profileId).notifier);
+    final selector = groups?.where((group) {
+      return group.type == GroupType.Selector;
+    }).firstOrNull;
+    if (selector != null) {
+      notifier.put(selector.copyWith(proxies: [...?selector.proxies, name]));
+      return;
+    }
+    if (groups != null && groups.isNotEmpty) {
+      final target = groups.first;
+      notifier.put(target.copyWith(proxies: [...?target.proxies, name]));
+      return;
+    }
+    final taken = {
+      for (final proxy
+          in ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
+        proxy.name,
+      ...?groups?.map((group) => group.name),
+      ...reservedCustomProxyNames,
+    };
+    notifier.put(
+      ProxyGroup(
+        id: snowflake.id,
+        name: freeProxyName('Proxy', taken),
+        type: GroupType.Selector,
+        proxies: [name],
       ),
     );
   }

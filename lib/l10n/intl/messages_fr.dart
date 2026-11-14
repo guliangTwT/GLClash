@@ -459,7 +459,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "cannotSave": MessageLookupByLibrary.simpleMessage(
       "Enregistrement impossible",
     ),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("Ajouter une chaîne"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("Direct"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "Aucune chaîne pour l\'instant. Ajoutez-en une, sa sortie sera créée.",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage(
       "Adresse de sortie",
     ),

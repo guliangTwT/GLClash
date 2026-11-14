@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "このサブスクリプションのノード",
   "chainSubscriptionFilter": "ノード絞り込み",
   "chainSubscriptionFilterDesc": "この上流用に、そのサブスクリプションを含むプロキシグループを作成します。絞り込みを空にすると全ノード、ノード名の一部を入れると範囲を狭められます。",
+  "chainAdd": "チェーンを追加",
+  "chainEmpty": "チェーンがまだありません。追加すると出口も作成されます。",
   "confirmExitWindow": "現在のウィンドウを閉じてもよろしいですか？",
   "optional": "任意",
   "maxFailedTimes": "最大失敗回数",

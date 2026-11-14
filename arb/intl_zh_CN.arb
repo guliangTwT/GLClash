@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "该订阅里的节点",
   "chainSubscriptionFilter": "节点过滤",
   "chainSubscriptionFilterDesc": "会为这个上游创建一个包含该订阅的策略组。过滤留空表示包含全部节点；填入节点名的一部分可缩小范围，例如「日本」。",
+  "chainAdd": "添加链路",
+  "chainEmpty": "还没有链路。添加一条即可自动创建出口。",
   "confirmExitWindow": "确定要退出当前窗口吗？",
   "optional": "可选",
   "maxFailedTimes": "最大失败次数",

@@ -460,7 +460,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Deseleccionar todo",
     ),
     "cannotSave": MessageLookupByLibrary.simpleMessage("No se puede guardar"),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("Añadir cadena"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("Directo"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "Aún no hay cadenas. Añade una y su salida se crea sola.",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage(
       "Dirección de salida",
     ),

@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "Un nœud de cet abonnement",
   "chainSubscriptionFilter": "Filtre de nœuds",
   "chainSubscriptionFilterDesc": "Un groupe contenant l'abonnement est créé pour cet amont. Un filtre vide prend tous les nœuds ; une partie du nom d'un nœud restreint le groupe.",
+  "chainAdd": "Ajouter une chaîne",
+  "chainEmpty": "Aucune chaîne pour l'instant. Ajoutez-en une, sa sortie sera créée.",
   "confirmExitWindow": "Voulez-vous vraiment quitter la fenêtre actuelle ?",
   "optional": "Facultatif",
   "maxFailedTimes": "Échecs maximum",

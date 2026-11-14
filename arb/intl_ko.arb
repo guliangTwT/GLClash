@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "이 구독의 노드",
   "chainSubscriptionFilter": "노드 필터",
   "chainSubscriptionFilterDesc": "이 업스트림용으로 해당 구독을 포함하는 그룹이 만들어집니다. 필터를 비우면 모든 노드, 노드 이름의 일부를 넣으면 범위가 좁아집니다.",
+  "chainAdd": "체인 추가",
+  "chainEmpty": "아직 체인이 없습니다. 추가하면 출구가 함께 만들어집니다.",
   "confirmExitWindow": "현재 창을 닫으시겠습니까?",
   "optional": "선택 사항",
   "maxFailedTimes": "최대 실패 횟수",

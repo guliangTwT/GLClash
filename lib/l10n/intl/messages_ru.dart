@@ -441,7 +441,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("Снять выделение"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("Не удалось сохранить"),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("Добавить цепочку"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("Напрямую"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "Цепочек пока нет. Добавьте одну — точка выхода создастся сама.",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("Адрес выхода"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("Без вышестоящего"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("Цепочка прокси"),

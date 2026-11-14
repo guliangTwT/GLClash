@@ -367,7 +367,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
     "cancelSelectAll": MessageLookupByLibrary.simpleMessage("すべて選択解除"),
     "cannotSave": MessageLookupByLibrary.simpleMessage("保存できません"),
+    "chainAdd": MessageLookupByLibrary.simpleMessage("チェーンを追加"),
     "chainDirect": MessageLookupByLibrary.simpleMessage("直接接続"),
+    "chainEmpty": MessageLookupByLibrary.simpleMessage(
+      "チェーンがまだありません。追加すると出口も作成されます。",
+    ),
     "chainExitAddress": MessageLookupByLibrary.simpleMessage("出口アドレス"),
     "chainNoUpstream": MessageLookupByLibrary.simpleMessage("上流なし"),
     "chainProxy": MessageLookupByLibrary.simpleMessage("チェーンプロキシ"),

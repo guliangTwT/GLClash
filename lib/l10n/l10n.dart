@@ -5026,6 +5026,21 @@ class AppLocalizations {
     );
   }
 
+  /// `Add chain`
+  String get chainAdd {
+    return Intl.message('Add chain', name: 'chainAdd', desc: '', args: []);
+  }
+
+  /// `No chain yet. Add one and its exit is created for you.`
+  String get chainEmpty {
+    return Intl.message(
+      'No chain yet. Add one and its exit is created for you.',
+      name: 'chainEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to exit the current window?`
   String get confirmExitWindow {
     return Intl.message(

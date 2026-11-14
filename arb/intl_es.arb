@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "Un nodo de esta suscripción",
   "chainSubscriptionFilter": "Filtro de nodos",
   "chainSubscriptionFilterDesc": "Se crea un grupo con la suscripción para este origen. Un filtro vacío toma todos los nodos; parte del nombre de un nodo restringe el grupo.",
+  "chainAdd": "Añadir cadena",
+  "chainEmpty": "Aún no hay cadenas. Añade una y su salida se crea sola.",
   "confirmExitWindow": "¿Seguro que quieres salir de la ventana actual?",
   "optional": "Opcional",
   "maxFailedTimes": "Máximo de fallos",

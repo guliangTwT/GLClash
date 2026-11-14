@@ -612,6 +612,8 @@
   "chainSubscriptionNode": "A node of this subscription",
   "chainSubscriptionFilter": "Node filter",
   "chainSubscriptionFilterDesc": "A group carrying the subscription is created for this upstream. Leave the filter empty to take every node, or name part of a node's name to narrow the group.",
+  "chainAdd": "Add chain",
+  "chainEmpty": "No chain yet. Add one and its exit is created for you.",
   "confirmExitWindow": "Are you sure you want to exit the current window?",
   "optional": "Optional",
   "maxFailedTimes": "Max failures",
