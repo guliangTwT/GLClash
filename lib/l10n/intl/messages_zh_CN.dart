@@ -350,6 +350,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainProxy": MessageLookupByLibrary.simpleMessage("链式代理"),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("上游地址"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上游地址"),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("手动填写上游地址"),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "只需类型、地址、端口和账号，保存后自动创建代理并设为该出口的上游。",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "端口范围是 1 到 65535",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "切换代理失败，已恢复上一次的选择",
     ),
@@ -1491,6 +1498,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateSourceOfficial": MessageLookupByLibrary.simpleMessage("GitHub 官方源"),
     "upload": MessageLookupByLibrary.simpleMessage("上传"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("上行带宽"),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("类型"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("使用Hosts"),

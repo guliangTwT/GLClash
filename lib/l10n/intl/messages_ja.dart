@@ -373,6 +373,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainProxy": MessageLookupByLibrary.simpleMessage("チェーンプロキシ"),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("上流アドレス"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("上流アドレス"),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("上流アドレスを入力"),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "種類・アドレス・ポート・アカウントだけで十分です。保存するとプロキシが作成され、この出口の上流になります。",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "ポートは 1〜65535 の範囲で指定してください",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "プロキシの切り替えに失敗したため、前回の選択に戻しました",
     ),
@@ -1640,6 +1647,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateSourceOfficial": MessageLookupByLibrary.simpleMessage("GitHub 公式"),
     "upload": MessageLookupByLibrary.simpleMessage("アップロード"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("アップロード帯域幅"),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("種類"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("Hostsを使用"),

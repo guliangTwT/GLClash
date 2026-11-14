@@ -713,21 +713,26 @@ List<Map<String, dynamic>> appProxiesPayload(
   required List<ProxyGroup> groups,
 }) {
   final named = {for (final group in groups) ...?group.proxies};
-  // Names the config will actually declare: the local proxies a group takes in,
-  // the groups themselves, and the targets mihomo defines for every config.
+  final chain = {for (final proxy in proxies) proxy.name: ?dialers[proxy.id]};
+  // A proxy an exit dials through is declared even when no group names it: an
+  // upstream typed in by hand exists for that alone, and mihomo refuses a
+  // dialer-proxy it cannot resolve. Taking the targets of every proxy, not only
+  // of the named ones, carries a chain that runs through such an upstream.
+  final upstreams = {
+    for (final target in chain.values)
+      if (proxies.any((proxy) => proxy.name == target)) target,
+  };
+  // What the config declares: the proxies a group takes in, plus the upstreams.
   bool declared(String name) =>
       named.contains(name) ||
+      upstreams.contains(name) ||
       groups.any((group) => group.name == name) ||
       RuleTarget.baseTargets.contains(name) ||
       name == GroupName.GLOBAL.name;
-  final chain = {
-    for (final proxy in proxies)
-      if (named.contains(proxy.name)) proxy.name: ?dialers[proxy.id],
-  };
   final looping = _DialLoops(groups, chain).looping;
   final payload = <Map<String, dynamic>>[];
   for (final proxy in proxies) {
-    if (!named.contains(proxy.name)) {
+    if (!declared(proxy.name)) {
       continue;
     }
     final dialer = chain[proxy.name];
@@ -765,7 +770,9 @@ List<CustomIssue> proxyDialerIssues(
   if (target == null) {
     return const [];
   }
-  if (!data.isRuleTarget(target)) {
+  // A local proxy a group does not name still reaches the config when a chain
+  // points at it, which is how a typed-in upstream exists at all.
+  if (!data.isRuleTarget(target) && !data.proxies.contains(target)) {
     return [CustomIssue.missingDialer(target)];
   }
   final loops = data.dialers[proxy.name] == target

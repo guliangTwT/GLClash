@@ -472,6 +472,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
       "Dirección de origen",
     ),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage(
+      "Introducir dirección de origen",
+    ),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "Solo hacen falta el tipo, la dirección, el puerto y la cuenta; el proxy se crea y pasa a ser el origen de esta salida.",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "El puerto debe estar entre 1 y 65535",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "No se pudo cambiar de proxy; se ha restaurado la selección anterior",
     ),
@@ -2071,6 +2080,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage(
       "Ancho de banda de subida",
     ),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("Tipo"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("Usar hosts"),

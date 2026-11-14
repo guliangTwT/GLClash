@@ -1944,8 +1944,8 @@ void main() {
       expect(homeYaml['dialer-proxy'], 'Hop');
     });
 
-    test('a dialer that the config would not declare is dropped, not left '
-        'dangling', () async {
+    test('an upstream no proxy carries is dropped, not written dangling '
+        'and not left out', () async {
       final profile = Profile.custom(label: 'p');
       final core = _MockCoreHandlerInterface();
       const home = CustomProxy(
@@ -1954,9 +1954,12 @@ void main() {
       );
       const ghost = CustomProxy(
         id: 12,
-        definition: {'name': 'Ghost', 'type': 'socks5', 'server': '::1'},
+        definition: {'name': 'Ghost', 'type': 'socks5', 'server': '::2'},
       );
-      final setupState = nullProfileSetupState.copyWith(
+      // Ghost is a local proxy no group names, which is exactly what an
+      // upstream typed in by hand looks like: it still belongs in the config.
+      const declared = nullProfileSetupState;
+      final withUpstream = declared.copyWith(
         profileId: profile.id,
         profileType: ProfileType.custom,
         proxyGroups: [
@@ -1968,8 +1971,6 @@ void main() {
           ),
         ],
         appProxies: const [home, ghost],
-        // Ghost is named by no group, so the config never declares it; mihomo
-        // rejects the whole file for a dialer-proxy it cannot resolve.
         proxyDialers: const {11: 'Ghost'},
       );
       final scoped = ProviderContainer(
@@ -1980,17 +1981,37 @@ void main() {
       );
       addTearDown(scoped.dispose);
 
+      Map<String, YamlMap> proxiesOf(String yaml) => {
+        for (final proxy in (loadYaml(yaml) as YamlMap)['proxies'] as YamlList)
+          proxy['name'] as String: proxy as YamlMap,
+      };
+
       final res = await scoped
           .read(setupActionProvider.notifier)
           .getProfile(
-            setupState: setupState,
+            setupState: withUpstream,
             patchConfig: const PatchClashConfig(),
           );
-      final proxies = (loadYaml(res.yaml) as YamlMap)['proxies'] as YamlList;
-      final homeYaml = proxies.single as YamlMap;
+      final proxies = proxiesOf(res.yaml);
 
-      expect(homeYaml['name'], 'Home');
-      expect(homeYaml.containsKey('dialer-proxy'), isFalse);
+      // Both are declared, and Home dials through Ghost.
+      expect(proxies.keys, ['Home', 'Ghost']);
+      expect(proxies['Home']!['dialer-proxy'], 'Ghost');
+
+      // A target no proxy carries cannot be dialed: it is dropped rather than
+      // written into a config mihomo would refuse outright.
+      final missing = withUpstream.copyWith(
+        proxyDialers: const {11: 'Nowhere'},
+      );
+      final res2 = await scoped
+          .read(setupActionProvider.notifier)
+          .getProfile(
+            setupState: missing,
+            patchConfig: const PatchClashConfig(),
+          );
+      final proxies2 = proxiesOf(res2.yaml);
+
+      expect(proxies2['Home']!.containsKey('dialer-proxy'), isFalse);
     });
 
     test('a custom profile group taking in every proxy or provider declares '

@@ -10,3 +10,4 @@ export 'selection_sheet.dart';
 export 'filter.dart';
 export 'rule.dart';
 export 'rule_preset.dart';
+export 'upstream_proxy_form.dart';

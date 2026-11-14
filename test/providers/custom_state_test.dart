@@ -538,6 +538,8 @@ void main() {
 
     test('a dialer must exist and must not lead back', () {
       expect(proxyDialerIssues(home, 'Relay', profileData), isEmpty);
+      // A local proxy is a valid upstream whether or not a group names it: a
+      // chain typed in by hand declares its own upstream.
       expect(
         proxyDialerIssues(
           home,
@@ -550,9 +552,8 @@ void main() {
         ),
         isEmpty,
       );
-      expect(proxyDialerIssues(home, 'Work', profileData), [
-        const CustomIssue.missingDialer('Work'),
-      ]);
+      expect(proxyDialerIssues(home, 'Work', profileData), isEmpty);
+      // A name no proxy carries is the one that cannot be dialed.
       expect(proxyDialerIssues(home, 'Gone', profileData), [
         const CustomIssue.missingDialer('Gone'),
       ]);

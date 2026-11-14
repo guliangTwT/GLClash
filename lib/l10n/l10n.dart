@@ -4956,6 +4956,36 @@ class AppLocalizations {
     return Intl.message('Direct', name: 'chainDirect', desc: '', args: []);
   }
 
+  /// `Enter upstream address`
+  String get chainUpstreamManual {
+    return Intl.message(
+      'Enter upstream address',
+      name: 'chainUpstreamManual',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only the type, address, port and account are needed; the proxy is created and used as this exit's upstream.`
+  String get chainUpstreamManualDesc {
+    return Intl.message(
+      'Only the type, address, port and account are needed; the proxy is created and used as this exit\'s upstream.',
+      name: 'chainUpstreamManualDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use a port between 1 and 65535`
+  String get chainUpstreamPortInvalid {
+    return Intl.message(
+      'Use a port between 1 and 65535',
+      name: 'chainUpstreamPortInvalid',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to exit the current window?`
   String get confirmExitWindow {
     return Intl.message(
@@ -7536,6 +7566,11 @@ class AppLocalizations {
   /// `Protocol`
   String get protocol {
     return Intl.message('Protocol', name: 'protocol', desc: '', args: []);
+  }
+
+  /// `Type`
+  String get upstreamType {
+    return Intl.message('Type', name: 'upstreamType', desc: '', args: []);
   }
 
   /// `Protocol parameter`

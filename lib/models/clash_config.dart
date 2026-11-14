@@ -979,13 +979,18 @@ abstract class CustomProfileData with _$CustomProfileData {
 final _namedProxies = Expando<Set<String>>();
 
 extension CustomProfileDataExt on CustomProfileData {
+  /// A local proxy that reaches the config: one a group names, or one a chain
+  /// dials through, since a typed-in upstream is declared for that alone.
   Set<String> get namedProxies => _namedProxies[this] ??= Set.unmodifiable({
     for (final group in proxyGroups)
       for (final name in group.proxies ?? const <String>[])
         if (proxies.contains(name)) name,
+    for (final target in dialers.values)
+      if (proxies.contains(target)) target,
   });
 
-  /// A local proxy reaches the config only when a group names it.
+  /// Whether a rule, a dialer or a DNS/NTP entry may name this target: the
+  /// core's own, a group of the profile, or a local proxy the config carries.
   bool isRuleTarget(String? name) =>
       ruleTargets.contains(name) ||
       name == GroupName.GLOBAL.name ||

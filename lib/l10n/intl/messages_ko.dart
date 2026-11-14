@@ -364,6 +364,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainProxy": MessageLookupByLibrary.simpleMessage("프록시 체인"),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("업스트림 주소"),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage("업스트림 주소 입력"),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "종류, 주소, 포트, 계정만 있으면 됩니다. 저장하면 프록시가 만들어지고 이 출구의 업스트림이 됩니다.",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "포트는 1~65535 범위여야 합니다",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "프록시를 전환하지 못해 이전 선택을 복원했습니다",
     ),
@@ -1615,6 +1622,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateSourceOfficial": MessageLookupByLibrary.simpleMessage("GitHub 공식"),
     "upload": MessageLookupByLibrary.simpleMessage("업로드"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("업로드 대역폭"),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("종류"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("hosts 사용"),

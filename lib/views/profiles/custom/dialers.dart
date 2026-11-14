@@ -6,6 +6,10 @@ import 'package:gl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// The selection sheet's entry that opens the short upstream form. A value no
+/// proxy or group can carry, so it cannot collide with a real target.
+const _manualUpstream = '\u0000manual-upstream';
+
 /// A proxy's chain, read as the two addresses that decide where its traffic
 /// leaves from: the exit this profile names, and the upstream that carries it.
 ///
@@ -29,7 +33,6 @@ class CustomProxyDialersView extends ConsumerWidget {
         builder: (_, ref, _) {
           final appLocalizations = context.appLocalizations;
           final profileData = ref.watch(customProfileDataProvider(profileId));
-          final named = profileData?.namedProxies ?? const <String>{};
           final groups = profileData?.proxyGroups ?? const <ProxyGroup>[];
           final loopOf = dialerLoopsOf(
             groups,
@@ -37,12 +40,14 @@ class CustomProxyDialersView extends ConsumerWidget {
             dialers: profileData?.dialers ?? const {},
           );
           bool loops(String target) => loopOf(target).isNotEmpty;
+          // Every local proxy is offered, not only the ones a group names: an
+          // upstream may exist for no other reason, and the config declares it
+          // because a chain points at it.
           final nodes = {
             for (final item
                 in ref.watch(customProxiesProvider).value ??
                     const <CustomProxy>[])
-              if (named.contains(item.name) && !loops(item.name))
-                item.name: proxyAddress(item),
+              if (!loops(item.name)) item.name: proxyAddress(item),
           };
           final groupTypes = {
             for (final group in groups)
@@ -51,6 +56,10 @@ class CustomProxyDialersView extends ConsumerWidget {
           return SelectionSheet<String>(
             title: appLocalizations.chainUpstream,
             sections: [
+              SelectionSection(
+                label: appLocalizations.chainUpstreamManual,
+                items: const [_manualUpstream],
+              ),
               SelectionSection(
                 label: appLocalizations.chainNoUpstream,
                 items: const [''],
@@ -66,8 +75,11 @@ class CustomProxyDialersView extends ConsumerWidget {
                 subtitleBuilder: (_, name) => groupTypes[name],
               ),
             ],
-            labelBuilder: (item) =>
-                item.isEmpty ? appLocalizations.chainDirect : item,
+            labelBuilder: (item) => switch (item) {
+              _manualUpstream => appLocalizations.chainUpstreamManual,
+              '' => appLocalizations.chainDirect,
+              _ => item,
+            },
             selectedOf: (ref) => ref.watch(
               proxyDialersProvider(
                 profileId,
@@ -81,9 +93,48 @@ class CustomProxyDialersView extends ConsumerWidget {
     if (res == null) {
       return;
     }
+    if (res == _manualUpstream) {
+      if (!context.mounted) {
+        return;
+      }
+      final title = context.appLocalizations.chainUpstreamManual;
+      final upstream = await showUpstreamProxyForm(context, title: title);
+      if (upstream == null) {
+        return;
+      }
+      final name = _createUpstream(ref, upstream);
+      ref.read(proxyDialersProvider(profileId).notifier).set(proxy.id, name);
+      return;
+    }
     ref
         .read(proxyDialersProvider(profileId).notifier)
         .set(proxy.id, res.isEmpty ? null : res);
+  }
+
+  /// Saves the typed upstream as an app proxy and answers the name the chain
+  /// points at, since a dialer has to name a proxy the config carries.
+  String _createUpstream(WidgetRef ref, UpstreamProxy upstream) {
+    final taken = {
+      for (final proxy
+          in ref.read(customProxiesProvider).value ?? const <CustomProxy>[])
+        proxy.name,
+      ...ref.read(customGroupNamesProvider).value ?? const <String>{},
+      ...reservedCustomProxyNames,
+    };
+    final name = freeProxyName('${upstream.server}:${upstream.port}', taken);
+    ref
+        .read(customProxiesProvider.notifier)
+        .put(
+          CustomProxy.fromDefinition({
+            'name': name,
+            'type': upstream.type,
+            'server': upstream.server,
+            'port': upstream.port,
+            if (upstream.username.isNotEmpty) 'username': upstream.username,
+            if (upstream.password.isNotEmpty) 'password': upstream.password,
+          }),
+        );
+    return name;
   }
 
   @override

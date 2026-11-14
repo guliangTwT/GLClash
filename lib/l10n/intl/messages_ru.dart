@@ -449,6 +449,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage(
       "Адрес вышестоящего",
     ),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage(
+      "Ввести адрес вышестоящего",
+    ),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "Достаточно типа, адреса, порта и учётной записи; прокси создаётся и становится вышестоящим для этого выхода.",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "Порт должен быть от 1 до 65535",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "Не удалось переключить прокси; восстановлен предыдущий выбор",
     ),
@@ -2006,6 +2015,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "upload": MessageLookupByLibrary.simpleMessage("Отдача"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Скорость отдачи"),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("Тип"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("Использовать hosts"),

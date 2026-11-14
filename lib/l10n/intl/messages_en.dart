@@ -431,6 +431,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "chainProxy": MessageLookupByLibrary.simpleMessage("Proxy chain"),
     "chainUpstream": MessageLookupByLibrary.simpleMessage("Upstream address"),
     "chainUpstreamAddress": MessageLookupByLibrary.simpleMessage("Upstream"),
+    "chainUpstreamManual": MessageLookupByLibrary.simpleMessage(
+      "Enter upstream address",
+    ),
+    "chainUpstreamManualDesc": MessageLookupByLibrary.simpleMessage(
+      "Only the type, address, port and account are needed; the proxy is created and used as this exit\'s upstream.",
+    ),
+    "chainUpstreamPortInvalid": MessageLookupByLibrary.simpleMessage(
+      "Use a port between 1 and 65535",
+    ),
     "changeProxyFailedTip": MessageLookupByLibrary.simpleMessage(
       "Failed to switch proxy; the previous selection has been restored",
     ),
@@ -1908,6 +1917,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateSourceOfficial": MessageLookupByLibrary.simpleMessage("GitHub"),
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Upload bandwidth"),
+    "upstreamType": MessageLookupByLibrary.simpleMessage("Type"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
     "urlTip": m83,
     "useHosts": MessageLookupByLibrary.simpleMessage("Use hosts"),
