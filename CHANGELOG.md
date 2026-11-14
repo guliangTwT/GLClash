@@ -1,26 +1,19 @@
 # Changelog
 
+## v1.0.4 (2026-11-14)
+
+**Features**
+
+- **custom** The chain page has an add button, and the empty state offers one; the exit is filled in and created on the spot, and a profile with no groups gets one so the chain actually reaches the config (cbc0a91)
+
 ## v1.0.3 (2026-11-14)
 
 **Features**
 
 - **custom** A chain's upstream can be picked from a subscription, creating a group that carries it so a node of that sub is reachable as the upstream (ee746cc)
-
-## v1.0.2 (2026-11-14)
-
-**Features**
-
 - **custom** A chain's upstream can be typed in as type, address, port and account, creating the proxy for you; a typed upstream is declared in the config even when no group names it (7e568e1)
-
-## v1.0.1 (2026-11-14)
-
-**Features**
-
-- **custom** The dialer page is now a proxy chain view: every proxy a group names is shown as an exit with its upstream address, a group upstream shows the group, and a proxy with no upstream reads as direct (b0ae014)
-
-**Bug Fixes**
-
-- **custom** A chain naming a proxy the config does not declare is dropped, and a chain through such a name is no longer offered; one dangling reference used to make the core reject the whole profile (b0ae014)
+- **custom** The dialer page became a proxy chain view showing each proxy's exit and upstream address, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole profile (b0ae014)
+- **custom** Release notes for the chain view were spelled out in full (cfa1138)
 
 ## v1.0.0 (2026-11-08)
 
