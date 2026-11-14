@@ -2,6 +2,24 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "1.0.5",
+      "tag": "v1.0.5",
+      "date": "2026-11-15",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "feat",
+          "entries": [
+            {
+              "id": "c4429ba",
+              "scope": "custom",
+              "text": "A chain's upstream can be filled in from one pasted line, and three dialer loops that made the core reject the whole config are now caught"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "1.0.4",
       "tag": "v1.0.4",
       "date": "2026-11-14",
@@ -13,7 +31,7 @@
             {
               "id": "cbc0a91",
               "scope": "custom",
-              "text": "The chain page has an add button, and the empty state offers one; the exit is filled in and created on the spot, and a profile with no groups gets one so the chain actually reaches the config"
+              "text": "The chain page has an add button, and a profile with no groups gets one so the chain it creates actually reaches the config"
             }
           ]
         }
@@ -39,14 +57,14 @@
               "text": "A chain's upstream can be typed in as type, address, port and account, creating the proxy for you; a typed upstream is declared in the config even when no group names it"
             },
             {
-              "id": "b0ae014",
-              "scope": "custom",
-              "text": "The dialer page became a proxy chain view showing each proxy's exit and upstream address, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole profile"
+              "id": "cfa1138",
+              "scope": "release",
+              "text": "v1.0.1 notes describe the proxy chain view and the dropped dangling dialer"
             },
             {
-              "id": "cfa1138",
+              "id": "b0ae014",
               "scope": "custom",
-              "text": "Release notes for the chain view were spelled out in full"
+              "text": "The custom profile dialer page is now a proxy chain view showing exit and upstream addresses, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole config"
             }
           ]
         }
@@ -64,7 +82,7 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once."
+              "text": "builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand."
             }
           ]
         },
@@ -74,17 +92,7 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up."
-            }
-          ]
-        },
-        {
-          "type": "fix",
-          "entries": [
-            {
-              "id": "efea6c8",
-              "scope": "update",
-              "text": "A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed."
+              "text": "Serve updates from GitHub with Codeberg as the standby"
             }
           ]
         }

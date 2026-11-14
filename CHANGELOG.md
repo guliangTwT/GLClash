@@ -1,10 +1,16 @@
 # Changelog
 
+## v1.0.5 (2026-11-15)
+
+**Features**
+
+- **custom** A chain's upstream can be filled in from one pasted line, and three dialer loops that made the core reject the whole config are now caught (c4429ba)
+
 ## v1.0.4 (2026-11-14)
 
 **Features**
 
-- **custom** The chain page has an add button, and the empty state offers one; the exit is filled in and created on the spot, and a profile with no groups gets one so the chain actually reaches the config (cbc0a91)
+- **custom** The chain page has an add button, and a profile with no groups gets one so the chain it creates actually reaches the config (cbc0a91)
 
 ## v1.0.3 (2026-11-14)
 
@@ -12,22 +18,18 @@
 
 - **custom** A chain's upstream can be picked from a subscription, creating a group that carries it so a node of that sub is reachable as the upstream (ee746cc)
 - **custom** A chain's upstream can be typed in as type, address, port and account, creating the proxy for you; a typed upstream is declared in the config even when no group names it (7e568e1)
-- **custom** The dialer page became a proxy chain view showing each proxy's exit and upstream address, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole profile (b0ae014)
-- **custom** Release notes for the chain view were spelled out in full (cfa1138)
+- **release** v1.0.1 notes describe the proxy chain view and the dropped dangling dialer (cfa1138)
+- **custom** The custom profile dialer page is now a proxy chain view showing exit and upstream addresses, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole config (b0ae014)
 
 ## v1.0.0 (2026-11-08)
 
 **Breaking Changes**
 
-- **update** Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once. (efea6c8)
+- **update** builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand. (efea6c8)
 
 **Features**
 
-- **update** Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up. (efea6c8)
-
-**Bug Fixes**
-
-- **update** A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed. (efea6c8)
+- **update** Serve updates from GitHub with Codeberg as the standby (efea6c8)
 
 <!-- changelog:frozen -->
 <!-- Entries below predate the structured pipeline. Their wording is kept as written; only the heading and list style were normalized. -->
