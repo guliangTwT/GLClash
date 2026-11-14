@@ -2,6 +2,24 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "1.0.3",
+      "tag": "v1.0.3",
+      "date": "2026-11-14",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "feat",
+          "entries": [
+            {
+              "id": "ee746cc",
+              "scope": "custom",
+              "text": "A chain's upstream can be picked from a subscription, creating a group that carries it so a node of that sub is reachable as the upstream"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "1.0.2",
       "tag": "v1.0.2",
       "date": "2026-11-14",
@@ -59,7 +77,7 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand."
+              "text": "Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once."
             }
           ]
         },
@@ -69,7 +87,17 @@
             {
               "id": "efea6c8",
               "scope": "update",
-              "text": "Serve updates from GitHub with Codeberg as the standby"
+              "text": "Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up."
+            }
+          ]
+        },
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "efea6c8",
+              "scope": "update",
+              "text": "A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed."
             }
           ]
         }

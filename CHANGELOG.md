@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.0.3 (2026-11-14)
+
+**Features**
+
+- **custom** A chain's upstream can be picked from a subscription, creating a group that carries it so a node of that sub is reachable as the upstream (ee746cc)
+
 ## v1.0.2 (2026-11-14)
 
 **Features**
@@ -20,11 +26,15 @@
 
 **Breaking Changes**
 
-- **update** builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand. (efea6c8)
+- **update** Builds up to 1.0.11 look for releases at GuLiang-I/GLClash, which is suspended. They cannot see this version and have to be updated by hand once. (efea6c8)
 
 **Features**
 
-- **update** Serve updates from GitHub with Codeberg as the standby (efea6c8)
+- **update** Every release is published on Codeberg beside GitHub; when the GitHub API and the release page both fail, the update check asks Codeberg instead of giving up. (efea6c8)
+
+**Bug Fixes**
+
+- **update** A download walks every host that serves the same file, and the transferred installer is checked against its SHA-256 before it runs, so a damaged or truncated transfer is retried from the next host instead of being installed. (efea6c8)
 
 <!-- changelog:frozen -->
 <!-- Entries below predate the structured pipeline. Their wording is kept as written; only the heading and list style were normalized. -->
