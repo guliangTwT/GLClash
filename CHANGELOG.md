@@ -2,34 +2,34 @@
 
 ## v1.0.5 (2026-11-15)
 
-**Features**
+**新功能**
 
-- **custom** A chain's upstream can be filled in from one pasted line, and three dialer loops that made the core reject the whole config are now caught (c4429ba)
+- **custom** 链式代理的上游可以粘贴一整行直接填好，并修掉了三处会造成循环拨号、让内核拒收整份配置的问题 (c4429ba)
 
 ## v1.0.4 (2026-11-14)
 
-**Features**
+**新功能**
 
-- **custom** The chain page has an add button, and a profile with no groups gets one so the chain it creates actually reaches the config (cbc0a91)
+- **custom** 链式代理页有了新增按钮；配置里没有任何策略组时会自动建一个，新建的链条才真正生效 (cbc0a91)
 
 ## v1.0.3 (2026-11-14)
 
-**Features**
+**新功能**
 
-- **custom** A chain's upstream can be picked from a subscription, creating a group that carries it so a node of that sub is reachable as the upstream (ee746cc)
-- **custom** A chain's upstream can be typed in as type, address, port and account, creating the proxy for you; a typed upstream is declared in the config even when no group names it (7e568e1)
-- **release** v1.0.1 notes describe the proxy chain view and the dropped dangling dialer (cfa1138)
-- **custom** The custom profile dialer page is now a proxy chain view showing exit and upstream addresses, and a dialer naming a proxy the config does not declare is dropped instead of making the core reject the whole config (b0ae014)
+- **custom** 链式代理的上游可以从订阅里挑节点，会自动建一个承载它的策略组，这样该订阅的节点才能当上游 (ee746cc)
+- **custom** 链式代理的上游可以直接填类型、地址、端口和账号，代理会自动建好；手填的上游即使没有被策略组收录也会写进配置 (7e568e1)
+- **release** v1.0.1 的说明补上了链式代理视图和被丢弃的悬空上游 (cfa1138)
+- **custom** 自建配置的拨号页改成链式代理视图，分别显示出口地址与上游地址；上游指向配置里不存在的代理时会被丢弃，不再让内核拒收整份配置 (b0ae014)
 
 ## v1.0.0 (2026-11-08)
 
-**Breaking Changes**
+**重大变更**
 
-- **update** builds up to 1.0.11 read GuLiang-I/GLClash, which is suspended, so they cannot see this release and must be downloaded by hand. (efea6c8)
+- **update** 1.0.11 及更早的版本读的是已被封禁的 GuLiang-I/GLClash，看不到这个版本，需要手动下载。 (efea6c8)
 
-**Features**
+**新功能**
 
-- **update** Serve updates from GitHub with Codeberg as the standby (efea6c8)
+- **update** 更新源改为 GitHub，Codeberg 作为备用 (efea6c8)
 
 <!-- changelog:frozen -->
 <!-- Entries below predate the structured pipeline. Their wording is kept as written; only the heading and list style were normalized. -->

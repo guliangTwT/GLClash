@@ -51,11 +51,11 @@ void main() {
 
       expect(markdown, startsWith('# Changelog\n'));
       expect(markdown, contains('## v0.8.96 (2026-08-16)'));
-      expect(markdown, contains('**Breaking Changes**'));
+      expect(markdown, contains('**重大变更**'));
       expect(markdown, contains('- **lib** Backups need re-import (af20769)'));
       expect(markdown, contains('- Scopeless entry (2b3c4d5)'));
       expect(markdown, contains(changelogFrozenMarker));
-      expect(markdown.indexOf('**Features**'), greaterThan(0));
+      expect(markdown.indexOf('**新功能**'), greaterThan(0));
       expect(markdown, isNot(contains('### ')));
     });
   });
@@ -161,10 +161,7 @@ void main() {
         moreUrl: 'https://example.com',
       );
 
-      expect(
-        text,
-        '<b>Bug Fixes</b>\n• Reject &lt;script&gt; &amp; "quoted" input',
-      );
+      expect(text, '<b>问题修复</b>\n• Reject &lt;script&gt; &amp; "quoted" input');
     });
 
     test('says so when a version has no user facing changes', () {
@@ -226,7 +223,7 @@ void main() {
         moreUrl: 'https://example.com',
       );
 
-      expect(text, '<b>Bug Fixes</b>\n• Fix TUN');
+      expect(text, '<b>问题修复</b>\n• Fix TUN');
     });
 
     test('says so when a version has no user facing changes', () {

@@ -3,11 +3,11 @@ library;
 const changelogSchemaVersion = 2;
 
 enum ChangelogType {
-  breaking('breaking', 'Breaking Changes'),
-  feat('feat', 'Features'),
-  fix('fix', 'Bug Fixes'),
-  perf('perf', 'Performance'),
-  revert('revert', 'Reverts');
+  breaking('breaking', '重大变更'),
+  feat('feat', '新功能'),
+  fix('fix', '问题修复'),
+  perf('perf', '性能优化'),
+  revert('revert', '已回滚');
 
   const ChangelogType(this.id, this.title);
 

@@ -23,7 +23,7 @@ const releaseJsonEndMarker = '-->';
 
 const telegramLimit = 900;
 
-const emptyVersionNote = 'Internal improvements only.';
+const emptyVersionNote = '仅内部改进。';
 
 String renderMarkdown(Changelog changelog) {
   final buffer = StringBuffer()

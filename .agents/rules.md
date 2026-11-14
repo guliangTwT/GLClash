@@ -607,13 +607,13 @@ ships to users. The subject stays the developer facing summary and is only the f
 ```text
 feat(profiles): support per-profile override script
 
-Changelog: Per-profile override scripts
+Changelog: 支持每个配置独立的覆盖脚本
 ```
 
-- `Changelog:` is the English entry. `Changelog: skip` drops the commit from the changelog entirely.
-- The changelog is English only. A `Changelog-<locale>:` or `Breaking-<locale>:` trailer fails the hook, because
-  translated release copy does not belong in the commit history. Translate after the fact if ever needed, not in the
-  commit message.
+- `Changelog:` is the entry users read, and it is written in Chinese: the release page, the in-app update dialog and the
+  website all show it as typed. `Changelog: skip` drops the commit from the changelog entirely.
+- The changelog ships in one language. A `Changelog-<locale>:` or `Breaking-<locale>:` trailer fails the hook, because
+  per-locale release copy does not belong in the commit history.
 - `Changelog-Type:` moves an entry into another group, for example to promote a `refactor` that users will notice. Valid
   values are `breaking`, `feat`, `fix`, `perf`, `revert`.
 - `BREAKING CHANGE:` is required whenever the subject carries `!`, and its text becomes the breaking entry. A `!` commit

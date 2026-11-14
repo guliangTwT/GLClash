@@ -6,10 +6,15 @@ globalThis.GLClashSite = (() => {
   const MAX_STAGGER = 16;
   const TYPE_BY_TITLE = {
     'Breaking Changes': 'breaking',
+    重大变更: 'breaking',
     Features: 'feat',
+    新功能: 'feat',
     'Bug Fixes': 'fix',
+    问题修复: 'fix',
     Performance: 'perf',
+    性能优化: 'perf',
     Reverts: 'revert',
+    已回滚: 'revert',
   };
   const TYPE_KEYS = { breaking: 'typeBreaking', feat: 'typeFeat', fix: 'typeFix', perf: 'typePerf', revert: 'typeRevert' };
   const ICON_EXTERNAL =
@@ -232,7 +237,7 @@ globalThis.GLClashSite = (() => {
         entry.text += ` ${raw.trim()}`;
         continue;
       }
-      if (line === 'Internal improvements only.') version.empty = true;
+      if (line === 'Internal improvements only.' || line === '仅内部改进。') version.empty = true;
     }
     return versions;
   }

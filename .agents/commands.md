@@ -245,12 +245,13 @@ emulator validation; Kotlin compilation cannot prove those system callbacks.
 
 The changelog is derived from Conventional Commits by `tool/changelog.dart` and written to two committed files:
 `CHANGELOG.md` for readers and `changelog.json` for the renderers. See `.agents/rules.md` for the `Changelog:` trailers
-that decide the wording.
+that decide the wording; the entry text ships in Chinese, which is what the release page and the update dialog show.
 
 The app ships no changelog of its own. `render release` appends the released version as JSON inside an HTML comment
 (`<!-- glclash:changelog:json … -->`), so the release body GitHub already returns to `checkForUpdate` carries the
-notes shown in the update dialog. `parseReleaseChangelog` reads that block and falls back to the English
-bullets when a release predates it.
+notes shown in the update dialog. The group headings are translated from the stored type, so a release body in any
+language still renders with the reader's own headings; `parseReleaseChangelog` reads that block and falls back to the
+bullets in the body when a release predates it.
 
 ```bash
 dart run tool/changelog.dart verify                  # what CI checks
